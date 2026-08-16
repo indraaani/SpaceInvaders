@@ -4,7 +4,10 @@ public class ShipScript : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
     public bool shipIsAlive = true;
-    public BulletSpawner bullet;
+    [SerializeField] private Rigidbody2D Bullet;
+    [SerializeField] private GameObject shipGun;
+    [SerializeField] private float bulletOffset;
+    [SerializeField] private float bulletSpeed;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,13 +22,12 @@ public class ShipScript : MonoBehaviour
         {
             transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
             transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 270f));
-            //transform.rotation = new Quaternion(0f, 0f, 90f, 0f);   
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             transform.position -= new Vector3(speed * Time.deltaTime, 0f, 0f);
-                  transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));  
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));  
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
@@ -40,9 +42,9 @@ public class ShipScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));       
         }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
-            bullet.SpawnBullet();
+            SpawnBullet();
         }
     }
         private void OnCollisionEnter2D(Collision2D collision)
@@ -52,5 +54,12 @@ public class ShipScript : MonoBehaviour
             shipIsAlive = false;
             Debug.Log("game over");
         }
+    }
+    private void SpawnBullet()
+    {
+
+       Rigidbody2D NewBullet = Instantiate(Bullet, new Vector3(shipGun.transform.position.x, shipGun.transform.position.y, shipGun.transform.position.z + bulletOffset), transform.rotation);       
+       NewBullet.AddForce(NewBullet.transform.up * bulletSpeed);
+
     }
 }

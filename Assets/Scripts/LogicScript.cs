@@ -8,7 +8,7 @@ public class LogicScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     [ContextMenu("Increase Score")]
-    public void addScore()
+    public void AddScore()
     {
         playerScore = playerScore +1;
         scoreText.text = playerScore.ToString();

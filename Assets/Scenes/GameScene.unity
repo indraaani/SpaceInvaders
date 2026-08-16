@@ -150,7 +150,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ShipScript
   speed: 5
   shipIsAlive: 1
-  bullet: {fileID: 729150926}
+  Bullet: {fileID: 4250338818892895141, guid: c4a4047423d054aa28842f7a12c7a153, type: 3}
+  shipGun: {fileID: 729150924}
+  bulletOffset: 5
+  bulletSpeed: 1000
 --- !u!4 &373472574
 Transform:
   m_ObjectHideFlags: 0
@@ -317,7 +320,7 @@ GameObject:
   - component: {fileID: 613844273}
   m_Layer: 0
   m_Name: LogicManager
-  m_TagString: Untagged
+  m_TagString: Logic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -547,7 +550,6 @@ GameObject:
   m_Component:
   - component: {fileID: 729150925}
   - component: {fileID: 729150927}
-  - component: {fileID: 729150926}
   m_Layer: 0
   m_Name: ShipGun
   m_TagString: Untagged
@@ -570,21 +572,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 373472574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &729150926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 729150924}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47947cbd3664746ca9012550d2dcf60a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BulletSpawner
-  Bullet: {fileID: 6155881513605591228, guid: c4a4047423d054aa28842f7a12c7a153, type: 3}
-  shipGun: {fileID: 729150924}
-  bulletOffset: 2
 --- !u!212 &729150927
 SpriteRenderer:
   serializedVersion: 2
@@ -1005,6 +992,6 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 749466344}
   - {fileID: 710346615}
-  - {fileID: 613844274}
   - {fileID: 373472574}
+  - {fileID: 613844274}
   - {fileID: 935807564}
