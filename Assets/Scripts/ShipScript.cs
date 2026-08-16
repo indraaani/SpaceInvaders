@@ -8,11 +8,12 @@ public class ShipScript : MonoBehaviour
     [SerializeField] private GameObject shipGun;
     [SerializeField] private float bulletOffset;
     [SerializeField] private float bulletSpeed;
+    public LogicScript logic;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+          logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
@@ -47,19 +48,24 @@ public class ShipScript : MonoBehaviour
             SpawnBullet();
         }
     }
-        private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (shipIsAlive == true)
-        {
-            shipIsAlive = false;
-            Debug.Log("game over");
-        }
-    }
     private void SpawnBullet()
     {
 
        Rigidbody2D NewBullet = Instantiate(Bullet, new Vector3(shipGun.transform.position.x, shipGun.transform.position.y, shipGun.transform.position.z + bulletOffset), transform.rotation);       
        NewBullet.AddForce(NewBullet.transform.up * bulletSpeed);
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+      if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy"))
+
+        {
+            Destroy(gameObject);
+            shipIsAlive = false;
+            logic.GameOver();
+
+        }
+       
     }
 }
