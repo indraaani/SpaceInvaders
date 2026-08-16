@@ -34,9 +34,6 @@ public class EnemySpawner : MonoBehaviour
                 (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).x, Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
         float spawnY = Random.Range
                 (Camera.main.ScreenToWorldPoint(new Vector2(0, 0)).y, Camera.main.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-
-
-       // Debug.Log("sup");
        Instantiate(Enemy, new Vector3(Random.Range(spawnX, spawnY), Random.Range(spawnX, spawnY), 0), transform.rotation);
     }
 }
