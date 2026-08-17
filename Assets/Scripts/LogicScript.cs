@@ -19,6 +19,11 @@ public class LogicScript : MonoBehaviour
     {
         GameOverScreen.SetActive(true);
 
+        foreach (GameObject Enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                Destroy(Enemy);
+            }
+
     }
 
 }
