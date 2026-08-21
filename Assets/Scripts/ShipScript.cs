@@ -58,7 +58,12 @@ public class ShipScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-      if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy"))
+      if (collision.collider.attachedRigidbody == null)
+       {
+         return;
+       }
+
+    if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy"))
 
         {
             Destroy(gameObject);

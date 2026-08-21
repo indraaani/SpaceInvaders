@@ -1,7 +1,14 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
+  public class A
+  {
+    public float d;
+  }
+
+
     public LogicScript logic;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -15,9 +22,15 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+  private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.attachedRigidbody.gameObject.tag == "Bullet")
+
+    if (collision.collider.attachedRigidbody == null)
+        {
+          return;
+        }
+
+    if (collision.collider.attachedRigidbody.gameObject.tag == "Bullet")
         {
             Destroy(gameObject);
             logic.AddScore();
