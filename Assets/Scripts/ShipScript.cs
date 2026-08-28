@@ -43,6 +43,30 @@ public class ShipScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));       
         }
 
+        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 45f));
+        }        
+
+        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -45f));
+        }   
+
+        if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
+        {
+            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 135f));
+        }  
+
+        if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
+        {
+            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -135f));
+        }     
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             SpawnBullet();
