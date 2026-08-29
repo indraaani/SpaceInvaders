@@ -21,22 +21,22 @@ public class EnemyBehaviour : MonoBehaviour
         
     }
 
-  private void OnCollisionEnter2D(Collision2D collision)
+  private void OnTriggerEnter2D(Collider2D collision)
     {
 
-    if (collision.collider.attachedRigidbody == null)
+    if (collision.attachedRigidbody == null)
         {
           return;
         }
 
-    if (collision.collider.attachedRigidbody.gameObject.tag == "Bullet" && enemyHealth > 0)
+    if (collision.attachedRigidbody.gameObject.tag == "Bullet" && enemyHealth > 0)
         {
             enemyHealth = enemyHealth -1;
             UpdateEnemyHealth();
             
         }
 
-    if (collision.collider.attachedRigidbody.gameObject.tag == "Bullet" && enemyHealth <= 0)
+    if (collision.attachedRigidbody.gameObject.tag == "Bullet" && enemyHealth <= 0)
         {
             Destroy(gameObject);
             logic.AddScore();
