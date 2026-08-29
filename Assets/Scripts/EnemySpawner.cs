@@ -29,7 +29,6 @@ public class EnemySpawner : MonoBehaviour
         
     }
 
-
     void SpawnEnemy()
     {
         if(ship.shipIsAlive == true)

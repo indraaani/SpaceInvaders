@@ -9,7 +9,6 @@ public class LogicScript : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public GameObject GameOverScreen;
     public ShipScript shipScript;
-
     public TextMeshProUGUI shipHealthText;
 
     [ContextMenu("Increase Score")]
