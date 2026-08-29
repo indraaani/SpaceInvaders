@@ -9,6 +9,7 @@ public class ShipScript : MonoBehaviour
     [SerializeField] private float bulletOffset;
     [SerializeField] private float bulletSpeed;
     public LogicScript logic;
+    [SerializeField] public int shipHealth;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -82,12 +83,19 @@ public class ShipScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-      if (collision.collider.attachedRigidbody == null)
-       {
-         return;
-       }
+        if (collision.collider.attachedRigidbody == null)
+         {
+           return;
+         }
 
-    if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy"))
+        if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy") && (shipHealth > 0))
+        {
+            shipHealth = (shipHealth - 1);
+            logic.UpdateShipHealth();
+
+        }
+
+        if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy") && (shipHealth <= 0))
 
         {
             Destroy(gameObject);
@@ -96,5 +104,6 @@ public class ShipScript : MonoBehaviour
 
         }
        
-    }
+    } 
+       
 }
