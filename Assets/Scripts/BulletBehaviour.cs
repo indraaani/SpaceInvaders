@@ -13,9 +13,9 @@ public class BulletBehaviour : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.collider.gameObject.tag == "Bounds")
+        if(collision.gameObject.tag == "Bounds")
         {
             Destroy(gameObject);
 
