@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class BulletBehaviour : MonoBehaviour
 {
-public GameObject bounds;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-         bounds = GameObject.FindGameObjectWithTag("Bounds");
+    
     }
 
     // Update is called once per frame
