@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShipScript : MonoBehaviour
@@ -23,6 +24,17 @@ public class ShipScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // float verticalMovement = Input.GetAxis("Vertical");
+        // float horizontalMovement = Input.GetAxis("Horizontal");
+        
+        // transform.position += new Vector3(speed * Time.deltaTime * horizontalMovement, speed * Time.deltaTime * verticalMovement, 0f);
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            SpawnBullet();
+        }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
@@ -70,11 +82,6 @@ public class ShipScript : MonoBehaviour
             transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
             transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -135f));
         }     
-
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            SpawnBullet();
-        }
     }
     private void SpawnBullet()
     {
@@ -86,6 +93,7 @@ public class ShipScript : MonoBehaviour
 
     private void GainImmuninty()
     {
+
         shipIsImmune = true;
         Invoke(nameof(RevokeImmunity), immunityTimer);
     }
@@ -95,14 +103,14 @@ public class ShipScript : MonoBehaviour
         shipIsImmune = false;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.collider.attachedRigidbody == null || shipIsImmune == true)
+        if (collider.attachedRigidbody == null || shipIsImmune == true)
          {
            return;
          }
 
-        if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy") && (shipHealth > 0))
+        if ((shipIsAlive == true) && (collider.attachedRigidbody.gameObject.tag == "Enemy") && (shipHealth > 0))
         {
             shipHealth = (shipHealth - 1);
             logic.UpdateShipHealth();
@@ -110,7 +118,7 @@ public class ShipScript : MonoBehaviour
 
         }
 
-        if ((shipIsAlive == true) && (collision.collider.attachedRigidbody.gameObject.tag == "Enemy") && (shipHealth <= 0))
+        if ((shipIsAlive == true) && (collider.attachedRigidbody.gameObject.tag == "Enemy") && (shipHealth <= 0))
 
         {
             Destroy(gameObject);
@@ -118,7 +126,6 @@ public class ShipScript : MonoBehaviour
             logic.GameOver();
 
         }
-       
-    } 
-       
+    }
+
 }
