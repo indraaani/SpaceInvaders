@@ -10,6 +10,8 @@ public class ShipScript : MonoBehaviour
     [SerializeField] private float bulletSpeed;
     public LogicScript logic;
     [SerializeField] public int shipHealth;
+    private bool shipIsImmune = false;
+    [SerializeField] private float immunityTimer = 2f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -82,9 +84,20 @@ public class ShipScript : MonoBehaviour
 
     }
 
+    private void GainImmuninty()
+    {
+        shipIsImmune = true;
+        Invoke(nameof(RevokeImmunity), immunityTimer);
+    }
+
+    private void RevokeImmunity()
+    {
+        shipIsImmune = false;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.attachedRigidbody == null)
+        if (collision.collider.attachedRigidbody == null || shipIsImmune == true)
          {
            return;
          }
@@ -93,6 +106,7 @@ public class ShipScript : MonoBehaviour
         {
             shipHealth = (shipHealth - 1);
             logic.UpdateShipHealth();
+            GainImmuninty();
 
         }
 
