@@ -13,6 +13,7 @@ public class ShipScript : MonoBehaviour
     [SerializeField] public int shipHealth;
     private bool shipIsImmune = false;
     [SerializeField] private float immunityTimer = 2f;
+    [SerializeField] private float rotationSpeed = 2f;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,63 +26,70 @@ public class ShipScript : MonoBehaviour
     void Update()
     {
 
-        // float verticalMovement = Input.GetAxis("Vertical");
-        // float horizontalMovement = Input.GetAxis("Horizontal");
+        float verticalMovement = Input.GetAxis("Vertical");
+        float horizontalMovement = Input.GetAxis("Horizontal");
         
-        // transform.position += new Vector3(speed * Time.deltaTime * horizontalMovement, speed * Time.deltaTime * verticalMovement, 0f);
+        transform.position += new Vector3(speed * Time.deltaTime * horizontalMovement, speed * Time.deltaTime * verticalMovement, 0f);
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
             SpawnBullet();
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (verticalMovement != 0 || horizontalMovement != 0)
         {
-            transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 270f));
+            float targetAngle = Mathf.Atan2(verticalMovement, horizontalMovement) * Mathf.Rad2Deg - 90f;  
+            Quaternion targetRotation = Quaternion.Euler(0, 0, targetAngle);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position -= new Vector3(speed * Time.deltaTime, 0f, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));  
-        }
+        // if (Input.GetKey(KeyCode.RightArrow))
+        // {
+        //     transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 270f));
+        // }
 
-        if (Input.GetKey(KeyCode.UpArrow))
-        {
-            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-        }
+        // if (Input.GetKey(KeyCode.LeftArrow))
+        // {
+        //     transform.position -= new Vector3(speed * Time.deltaTime, 0f, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));  
+        // }
 
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            transform.position -= new Vector3(0f, speed * Time.deltaTime, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));       
-        }
+        // if (Input.GetKey(KeyCode.UpArrow))
+        // {
+        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+        // }
 
-        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 45f));
-        }        
+        // if (Input.GetKey(KeyCode.DownArrow))
+        // {
+        //     transform.position -= new Vector3(0f, speed * Time.deltaTime, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));       
+        // }
 
-        if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -45f));
-        }   
+        // if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
+        // {
+        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 45f));
+        // }        
 
-        if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 135f));
-        }  
+        // if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
+        // {
+        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -45f));
+        // }   
 
-        if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -135f));
-        }     
+        // if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
+        // {
+        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 135f));
+        // }  
+
+        // if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
+        // {
+        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
+        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -135f));
+        // }     
     }
     private void SpawnBullet()
     {
