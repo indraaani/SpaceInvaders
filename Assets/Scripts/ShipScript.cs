@@ -43,53 +43,6 @@ public class ShipScript : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        // if (Input.GetKey(KeyCode.RightArrow))
-        // {
-        //     transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 270f));
-        // }
-
-        // if (Input.GetKey(KeyCode.LeftArrow))
-        // {
-        //     transform.position -= new Vector3(speed * Time.deltaTime, 0f, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));  
-        // }
-
-        // if (Input.GetKey(KeyCode.UpArrow))
-        // {
-        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-        // }
-
-        // if (Input.GetKey(KeyCode.DownArrow))
-        // {
-        //     transform.position -= new Vector3(0f, speed * Time.deltaTime, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));       
-        // }
-
-        // if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.LeftArrow))
-        // {
-        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 45f));
-        // }        
-
-        // if (Input.GetKey(KeyCode.UpArrow) && Input.GetKey(KeyCode.RightArrow))
-        // {
-        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -45f));
-        // }   
-
-        // if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.LeftArrow))
-        // {
-        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 135f));
-        // }  
-
-        // if (Input.GetKey(KeyCode.DownArrow) && Input.GetKey(KeyCode.RightArrow))
-        // {
-        //     transform.position += new Vector3(0f, speed * Time.deltaTime, 0f);
-        //     transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -135f));
-        // }     
     }
     private void SpawnBullet()
     {
